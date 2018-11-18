@@ -6,6 +6,7 @@ import {
   MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatRadioModule, MatDatepickerModule,
   MatNativeDateModule, MatSelectModule, MatFormFieldModule
 } from '@angular/material';
+import {MatFileUploadModule} from "angular-material-fileupload";
 @NgModule({
   imports: [
     CommonModule,

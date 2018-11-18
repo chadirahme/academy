@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['teacher']);
       }else {
         this.invalidLogin = true;
-        alert(data.message);
+        alert('Invalid Username or Password !!');
       }
     });
 
@@ -97,15 +97,16 @@ export class LoginComponent implements OnInit {
       });
 
       console.log('ssss');
-      this.authService.getAll().subscribe(data => {
-        this.cars = data;
-        for (const car of this.cars) {
-          console.log(car.userName);
-        }
-      });
+
+      // this.authService.getAll().subscribe(data => {
+      //   this.cars = data;
+      //   for (const car of this.cars) {
+      //     console.log(car.userName);
+      //   }
+      // });
 
 
-      this.authService.getAll();
+      //this.authService.getAll();
     }
 
     catch (e) {

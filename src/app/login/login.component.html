@@ -44,7 +44,7 @@
         <tr>
           <td>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Username" formControlName="username"  name="username" required value="user1">
+              <input matInput placeholder="Username" formControlName="username"  name="username" required>
             </mat-form-field>
           </td>
           <td>
@@ -54,12 +54,19 @@
         </tr>
         <tr>
           <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" formControlName="password" type="password" name="password" required value="1">
+            <input matInput placeholder="Password" formControlName="password" type="password" name="password" required>
           </mat-form-field></td>
-        </tr></table>
+        </tr>
+
+      <tr>
+        <td>
+          <mat-card-actions>
+            <button mat-raised-button type="submit" color="primary">Login</button>
+          </mat-card-actions>
+        </td>
+      </tr>
+      </table>
     </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="onSubmit()" color="primary">Login</button>
-  </mat-card-actions>
+
 </mat-card>

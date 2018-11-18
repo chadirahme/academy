@@ -71,7 +71,7 @@
         <!--</td>-->
         <td>
           <mat-form-field>
-            <mat-select placeholder="Accademic Year">
+            <mat-select placeholder="Academic Year" (selectionChange)="changeYear($event.value)" >
               <mat-option *ngFor="let year of years" [value]="year">
                 {{year}}
               </mat-option>
@@ -83,7 +83,7 @@
         <tr>
           <td>
             <mat-form-field>
-              <mat-select placeholder="Grade">
+              <mat-select placeholder="Grade" (selectionChange)="changeGrade($event.value)">
                 <mat-option *ngFor="let grade of grades" [value]="grade">
                   {{grade}}
                 </mat-option>
@@ -96,7 +96,7 @@
         <tr>
           <td>
             <mat-form-field>
-              <mat-select placeholder="Class">
+              <mat-select placeholder="Class" (selectionChange)="changeClass($event.value)">
                 <mat-option *ngFor="let class of classes" [value]="class">
                   {{class}}
                 </mat-option>
@@ -109,7 +109,7 @@
         <tr>
           <td>
             <mat-form-field>
-              <mat-select placeholder="Subject">
+              <mat-select placeholder="Subject" (selectionChange)="changeSubject($event.value)">
                 <mat-option *ngFor="let subject of subjects" [value]="subject">
                   {{subject}}
                 </mat-option>
@@ -122,7 +122,7 @@
         <tr>
           <td>
             <mat-form-field>
-              <mat-select placeholder="Type">
+              <mat-select placeholder="Type" (selectionChange)="changeType($event.value)">
                 <mat-option *ngFor="let type of types" [value]="type">
                   {{type}}
                 </mat-option>
@@ -132,11 +132,33 @@
           </td>
         </tr>
 
+        <tr>
+          <td>
+
+            <label for="singleFile">Upload file</label>
+            <input id="singleFile" type="file" (change)="selectFile($event)"/>
+            <br>
+
+
+
+            <!--<mat-input id="picture" label="Upload Images" name="picture"-->
+                   <!--ngf-select="upload($file)" ng-model="picture" accept="image/*"-->
+                   <!--ngf-max-size="5MB" ngf-validate="{width: {min: 1400, max:2000}, height: {min: 630, max: 900}}">-->
+            <!--</mat-input>-->
+
+          </td>
+        </tr>
+        <tr>
+          <td align="right">
+            <mat-card-actions>
+              <button mat-raised-button  color="primary">Submit</button>
+            </mat-card-actions>
+          </td>
+        </tr>
+
 
       </table>
     </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="onSubmit()" color="primary">Login</button>
-  </mat-card-actions>
+
 </mat-card>
