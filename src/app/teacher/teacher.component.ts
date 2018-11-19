@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, FormBuilder} from "@angular/forms";
 import {AuthService} from "../core/auth.service";
 import {HttpResponse} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {MatTableDataSource, MatPaginator} from "@angular/material";
+// import {DataSource} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-teacher',
@@ -26,16 +29,29 @@ export class TeacherComponent implements OnInit {
   public selectedSubject: any;
   public selectedType: any;
   private file: FileUploadModel;
+  invalidLogin: boolean = false;
+  result: any;
+  fileUploads: Observable<string[]>;
 
   selectedFiles: FileList;
   currentFileUpload: File;
+   displayedColumns: string[] = ['academicyear','grade', 'section', 'subject','filetype','filepath'];
+  //displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  //dataSource: MatTableDataSource<Assignment>;
+  //dataSource = new MatTableDataSource();
+
+  //displayedColumns = ['position'];
+  dataSource = new MatTableDataSource();
+
 
   constructor(private formBuilder: FormBuilder,private authService: AuthService) {
     this.file=new FileUploadModel();
   }
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   ngOnInit() {
-    this.years =["2017-2018","2016-2017","2015-2016","2014-2015"];
+    this.years =["2018-2019","2017-2018","2016-2017","2015-2016","2014-2015"];
     this.grades =["KG1","KG2","Grade1","Grade2","Grade3","Grade4","Grade5","Grade6","Grade7",
     "Grade8","Grade9","Grade10","Grade11","Grade12"];
     this.classes=["A","B","C","D","E","F"];
@@ -50,23 +66,87 @@ export class TeacherComponent implements OnInit {
       username: [''],
       password: ['']
     });
+
+
+    this.loadData();
+
   }
 
+
+  loadData(): void {
+    try
+    {
+      this.authService.getTeacherAssignment().subscribe(data => {
+        this.dataSource = new MatTableDataSource(data);
+        //this.dataSource.paginator = this.paginator;
+        // this.fileUploads =data;
+        for (const car of data) {
+          console.log(car);
+        }
+      });
+
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
   onSubmit(): void {
     this.file.year=this.selectedYear;
     this.file.grade=this.selectedGrade;
-    this.file.fileclass=this.selectedClass;
+    this.file.section=this.selectedClass;
     this.file.subject=this.selectedSubject;
     this.file.filetype=this.selectedType;
+    this.file.description="desc";
+    this.file.teacherid=1;
     console.log(this.file);
 
     this.currentFileUpload = this.selectedFiles.item(0);
     //this.file.file= this.currentFileUpload;
-    this.authService.pushFileToStorage(this.currentFileUpload,this.file).subscribe(event => {
-      if (event instanceof HttpResponse) {
-        console.log('File is completely uploaded!');
+    this.authService.pushFileToStorage(this.currentFileUpload,this.file).subscribe(data => {
+      if(data){ //instanceof HttpResponse) {
+        console.log(data["message"]);
+        this.result=data["message"];
+        this.invalidLogin=true;
+        this.selectedFiles=null;
+        this.loadData();
       }
     });
+
+  }
+
+  onExport(filename: string) {
+    try {
+      console.log(filename);
+      //return ;
+      this.authService.getFiles(filename).subscribe(data => {
+        console.log('done');
+        let blob = new Blob([data], {type: "application/octet-stream"});
+        let fileName: string = filename; //"myfile.png" //+ this.request.output;
+        let dataType = data.type;
+        console.log(dataType);
+
+        let binaryData = [];
+        binaryData.push(data);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        if (fileName)
+          downloadLink.setAttribute('download', fileName);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+
+
+        // window.navigator.msSaveBlob(blob, fileName);
+
+
+        //const blob1 = new Blob([data], { type: 'text/csv' });
+        //const url= window.URL.createObjectURL(blob1);
+        //window.open(url);
+        //FileSaver.saveAs(blob1, 'data.csv');
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 
   changeYear(val){
@@ -96,11 +176,50 @@ export class TeacherComponent implements OnInit {
   }
 
 }
+// export class UserDataSource extends DataSource<any> {
+//   constructor(private  authService: AuthService) {
+//     super();
+//   }
+//   connect(): Observable<Assignment[]> {
+//     return this.authService.getTeacherAssignment();
+//   }
+//   disconnect() {}
+// }
 
 export class FileUploadModel {
-  year ?: string;
+  year ?: string=";"
+  grade: string ="";
+  section: string="";
+  subject: string="";
+  filetype: string="";
+  description: string="";
+  teacherid : any=0;
+}
+
+export interface Assignment {
+  id: number;
+  teacherid: number;
+  academicyear: string;
   grade: string;
-  fileclass: string;
+  section: string;
   subject: string;
   filetype: string;
+  filepath: string;
+  filename: string;
+  description: string;
 }
+
+export interface Element {
+  position: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+const ELEMENT_DATA: Element[] = [
+  {position: 1, firstName: 'John', lastName: 'Doe', email: 'john@gmail.com'},
+  {position: 1, firstName: 'Mike', lastName: 'Hussey', email: 'mike@gmail.com'},
+  {position: 1, firstName: 'Ricky', lastName: 'Hans', email: 'ricky@gmail.com'},
+  {position: 1, firstName: 'Martin', lastName: 'Kos', email: 'martin@gmail.com'},
+  {position: 1, firstName: 'Tom', lastName: 'Paisa', email: 'tom@gmail.com'}
+];

@@ -156,9 +156,63 @@
           </td>
         </tr>
 
+        <tr>
+          <td>
+            <div *ngIf="invalidLogin" class="error">
+              <div>{{result}}</div>
+            </div>
+          </td>
+        </tr>
+
 
       </table>
     </form>
+
+    <mat-table #table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="academicyear">
+        <mat-header-cell *matHeaderCellDef> Academic Year </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.academicyear}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="grade">
+        <mat-header-cell *matHeaderCellDef> Grade </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.grade}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="section">
+        <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.section}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="subject">
+        <mat-header-cell *matHeaderCellDef> Subject </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.subject}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="filetype">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.filetype}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="filepath">
+        <mat-header-cell *matHeaderCellDef> File </mat-header-cell>
+        <mat-cell *matCellDef="let element" (click)="onExport(element.filename)">
+          <button mat-raised-button  color="primary">Download</button>
+          <!--<a (click)="onExport($event)">Download</a>-->
+        </mat-cell>
+
+      </ng-container>
+
+
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+
   </mat-card-content>
 
 </mat-card>
