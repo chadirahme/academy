@@ -196,8 +196,14 @@
         <mat-cell *matCellDef="let element"> {{element.filetype}} </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="filename">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.filename}} </mat-cell>
+      </ng-container>
+
+
       <ng-container matColumnDef="filepath">
-        <mat-header-cell *matHeaderCellDef> File </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Download </mat-header-cell>
         <mat-cell *matCellDef="let element" (click)="onExport(element.filename)">
           <button mat-raised-button  color="primary">Download</button>
           <!--<a (click)="onExport($event)">Download</a>-->

@@ -25,7 +25,7 @@
 //
 // }
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {CarService} from "../shared/car.service";
@@ -46,7 +46,8 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-
+  parentMessage = "message from parent";
+  userId : string;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
 
@@ -75,12 +76,17 @@ export class LoginComponent implements OnInit {
     }
 
     console.log(loginPayload);
-    this.authService.attemptAuth(loginPayload.username,loginPayload.password).subscribe(data => {
+    this.authService.loginUser(loginPayload.username,loginPayload.password).subscribe(data => {
       //alert(data);
       if(data) {
-
+        this.userId=data["userid"];
+        localStorage.setItem('userId', this.userId);
+        localStorage.setItem('usertype', data["usertype"]);
         //window.localStorage.setItem('token', data.result.token);
+        if(data["usertype"]=="1")
         this.router.navigate(['teacher']);
+        else
+          this.router.navigate(['student']);
       }else {
         this.invalidLogin = true;
         alert('Invalid Username or Password !!');
@@ -114,5 +120,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  get UserId() {
+    return this.userId;
+  }
 
 }

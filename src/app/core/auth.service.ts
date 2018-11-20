@@ -10,11 +10,8 @@ import {Headers} from "@angular/http";
 @Injectable()
 export class AuthService {
 
-  public API1 = 'http://localhost:8090/';
-  public API = 'http://139.162.169.243/';
-
-  public CAR_API = this.API + '/doctors';
- // baseUrl: 'http://localhost:8080/email2sms/';
+  public API = 'http://localhost:8090/';
+  public API1 = 'http://139.162.169.243/';
 
   constructor(private http: HttpClient) {
     console.log(this.API);
@@ -25,17 +22,16 @@ export class AuthService {
     return this.http.get(this.API + 'employee');
   }
 
-
-  getAll1(): Observable<any> {
-    //this.http.get('http://localhost:3000/');
-    return this.http.get<any>(this.CAR_API);
-  }
-
   attemptAuth(username: string, password: string): Observable<any> {
     const credentials = {userName: username, password: password};
     console.log('attempAuth ::');
     return this.http.post<any>(this.API + 'login/employee', credentials)
+  }
 
+  loginUser(username: string, password: string): Observable<any> {
+    const credentials = {username: username, password: password};
+    console.log('attempAuth ::');
+    return this.http.post<any>(this.API + 'login/user', credentials)
   }
 
   pushFileToStorage(file: File, data: FileUploadModel): Observable<HttpEvent<{}>> {
@@ -98,10 +94,10 @@ export class AuthService {
   }
 
   //http://localhost:8090/getTeacherAssignment?teacherid=1
-  getTeacherAssignment(): Observable<Assignment[]> {
+  getTeacherAssignment(teacherid : string): Observable<Assignment[]> {
     console.log("ddd");
    // return this.http.get<any>(this.API + 'employee');
-    return this.http.get<Assignment[]>(this.API + 'getTeacherAssignment?teacherid=1');
+    return this.http.get<Assignment[]>(this.API + 'getTeacherAssignment?teacherid='+teacherid);
   }
 
   getFiles(filename: string): Observable<any> {

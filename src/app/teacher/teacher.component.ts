@@ -4,6 +4,7 @@ import {AuthService} from "../core/auth.service";
 import {HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {MatTableDataSource, MatPaginator} from "@angular/material";
+import {Router} from "@angular/router";
 // import {DataSource} from '@angular/cdk/collections';
 
 @Component({
@@ -35,17 +36,24 @@ export class TeacherComponent implements OnInit {
 
   selectedFiles: FileList;
   currentFileUpload: File;
-   displayedColumns: string[] = ['academicyear','grade', 'section', 'subject','filetype','filepath'];
+   displayedColumns: string[] = ['academicyear','grade', 'section', 'subject','filetype','filename' ,'filepath'];
   //displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   //dataSource: MatTableDataSource<Assignment>;
   //dataSource = new MatTableDataSource();
 
   //displayedColumns = ['position'];
   dataSource = new MatTableDataSource();
+  private userId: string;
+  private usertype: string;
 
-
-  constructor(private formBuilder: FormBuilder,private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder,private authService: AuthService,private router: Router) {
     this.file=new FileUploadModel();
+    this.userId = localStorage.getItem('userId');
+    this.usertype = localStorage.getItem('usertype');
+    if(this.usertype!="1")
+    {
+      this.router.navigate(['login']);
+    }
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -76,7 +84,7 @@ export class TeacherComponent implements OnInit {
   loadData(): void {
     try
     {
-      this.authService.getTeacherAssignment().subscribe(data => {
+      this.authService.getTeacherAssignment(this.userId).subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         //this.dataSource.paginator = this.paginator;
         // this.fileUploads =data;
@@ -97,8 +105,37 @@ export class TeacherComponent implements OnInit {
     this.file.subject=this.selectedSubject;
     this.file.filetype=this.selectedType;
     this.file.description="desc";
-    this.file.teacherid=1;
+    this.file.teacherid=this.userId;
     console.log(this.file);
+
+    //this.selectedFiles = undefined;
+
+    if(this.file.year==null){
+      alert('Please select a year !!');
+      return;
+    }
+    if(this.file.grade==null){
+      alert('Please select a grade !!');
+      return;
+    }
+    if(this.file.section==null){
+      alert('Please select a class !!');
+      return;
+    }
+    if(this.file.subject==null){
+      alert('Please select a subject !!');
+      return;
+    }
+    if(this.file.filetype==null){
+      alert('Please select a type !!');
+      return;
+    }
+
+    if(this.selectedFiles==null){
+      alert('Please select a file !!');
+      return;
+    }
+
 
     this.currentFileUpload = this.selectedFiles.item(0);
     //this.file.file= this.currentFileUpload;

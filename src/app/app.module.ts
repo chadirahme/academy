@@ -13,6 +13,7 @@ import {AuthService} from "./core/auth.service";
 import {CarService} from "./shared/car.service";
 import {HttpClientModule} from "@angular/common/http";
 import { TeacherComponent } from './teacher/teacher.component';
+import { StudentComponent } from './student/student.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TeacherComponent } from './teacher/teacher.component';
     LoginComponent,
     UserComponent,
     RegisterComponent,
-    TeacherComponent
+    TeacherComponent,
+    StudentComponent
   ],
   imports: [
     BrowserModule,
