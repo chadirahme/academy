@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatRadioModule, MatDatepickerModule,
-  MatNativeDateModule, MatSelectModule, MatFormFieldModule, MatPaginatorModule
+  MatNativeDateModule, MatSelectModule, MatFormFieldModule, MatPaginatorModule, MatGridListModule
 } from '@angular/material';
 import {MatFileUploadModule} from "angular-material-fileupload";
 @NgModule({
@@ -24,7 +24,8 @@ import {MatFileUploadModule} from "angular-material-fileupload";
     MatNativeDateModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatGridListModule
   ],
   exports: [
     CommonModule,
@@ -41,7 +42,8 @@ import {MatFileUploadModule} from "angular-material-fileupload";
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatGridListModule
   ],
 })
 export class CustomMaterialModule { }

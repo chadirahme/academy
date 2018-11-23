@@ -2,11 +2,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-      <span>American Academy School</span>
+    <span> <img src="/assets/logo.png" /></span>
+
+    <span style="margin-left: 40px">American Academy School</span>
+
     <!--<span><a href="/">HOME</a></span>-->
     <span class="spacer"></span>
+
+    <a mat-button routerLink="/" (click)="setTitle( 'Home - American Academy School' )">Home</a>
+    <a mat-button routerLink="/ourschool" (click)="setTitle( 'Our School - American Academy School' )">Our School</a>
+
     <!--<a mat-button routerLink="/register">Register</a>-->
-    <!--<a mat-button routerLink="/login">Login</a>-->
+    <a mat-button routerLink="/login" (click)="setTitle( 'Login - American Academy School' )">Login</a>
   </mat-toolbar-row>
 </mat-toolbar>
 

@@ -14,6 +14,8 @@ import {CarService} from "./shared/car.service";
 import {HttpClientModule} from "@angular/common/http";
 import { TeacherComponent } from './teacher/teacher.component';
 import { StudentComponent } from './student/student.component';
+import { HomeComponent } from './home/home.component';
+import { OurschoolComponent } from './ourschool/ourschool.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { StudentComponent } from './student/student.component';
     UserComponent,
     RegisterComponent,
     TeacherComponent,
-    StudentComponent
+    StudentComponent,
+    HomeComponent,
+    OurschoolComponent
   ],
   imports: [
     BrowserModule,
