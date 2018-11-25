@@ -88,9 +88,9 @@ export class TeacherComponent implements OnInit {
         this.dataSource = new MatTableDataSource(data);
         //this.dataSource.paginator = this.paginator;
         // this.fileUploads =data;
-        for (const car of data) {
-          console.log(car);
-        }
+        // for (const car of data) {
+        //   console.log(car);
+        // }
       });
 
     }

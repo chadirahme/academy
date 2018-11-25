@@ -16,6 +16,10 @@ import { TeacherComponent } from './teacher/teacher.component';
 import { StudentComponent } from './student/student.component';
 import { HomeComponent } from './home/home.component';
 import { OurschoolComponent } from './ourschool/ourschool.component';
+import {HomeLayoutComponent} from "./layouts/home-layout.component";
+import {LoginLayoutComponent} from "./layouts/login-layout.component";
+import {HeaderComponent} from "./header/header.component";
+import {AuthGuard} from "./core/auth.guard";
 
 @NgModule({
   declarations: [
@@ -26,7 +30,10 @@ import { OurschoolComponent } from './ourschool/ourschool.component';
     TeacherComponent,
     StudentComponent,
     HomeComponent,
-    OurschoolComponent
+    OurschoolComponent,
+    HomeLayoutComponent,
+    LoginLayoutComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,7 @@ import { OurschoolComponent } from './ourschool/ourschool.component';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [CarService,FormBuilder],
+  providers: [CarService,FormBuilder,AuthGuard,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

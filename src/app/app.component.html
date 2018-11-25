@@ -1,6 +1,6 @@
 
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="!isUserLoggedIn">
   <mat-toolbar-row>
     <span> <img src="/assets/logo.png" /></span>
 
@@ -13,7 +13,9 @@
     <a mat-button routerLink="/ourschool" (click)="setTitle( 'Our School - American Academy School' )">Our School</a>
 
     <!--<a mat-button routerLink="/register">Register</a>-->
-    <a mat-button routerLink="/login" (click)="setTitle( 'Login - American Academy School' )">Login</a>
+    <a mat-button routerLink="/login"  (click)="setTitle( 'Login - American Academy School' )">Login</a>
+    <a mat-button routerLink="/login" *ngIf="isLoggedIn$ | async" (click)="setTitle( 'Login - American Academy School' )">Logout</a>
+
   </mat-toolbar-row>
 </mat-toolbar>
 

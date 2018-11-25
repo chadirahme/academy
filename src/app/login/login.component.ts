@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
 
   parentMessage = "message from parent";
   userId : string;
+  private formSubmitAttempt: boolean;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
 
@@ -65,7 +66,14 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onSubmit(): void {
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value);
+    }
+    this.formSubmitAttempt = true;
+  }
+
+  onSubmit1(): void {
     if (this.loginForm.invalid) {
       //alert('Invliad');
       return;
@@ -79,6 +87,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(loginPayload.username,loginPayload.password).subscribe(data => {
       //alert(data);
       if(data) {
+
         this.userId=data["userid"];
         localStorage.setItem('userId', this.userId);
         localStorage.setItem('usertype', data["usertype"]);

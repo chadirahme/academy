@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <span>
+    <img src="/assets/logo.png" class="angular-logo">
+
+    American Academy School
+
+  </span>
+  <span class="fill-remaining-space"></span>
+  <a mat-button routerLink="/" (click)="setTitle( 'Home - American Academy School' )">Home</a>
+  <a mat-button routerLink="/ourschool" (click)="setTitle( 'Our School - American Academy School' )">Our School</a>
+  <a mat-button routerLink="/login" *ngIf="!(isLoggedIn$ | async)"  (click)="setTitle( 'Login - American Academy School' )">Login</a>
+  <!--<button mat-button>Menu Option 01</button>-->
+  <!--<button mat-button>Menu Option 02</button>-->
+  <a mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</a>
+</mat-toolbar>

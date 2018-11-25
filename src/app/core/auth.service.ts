@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter, Output} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {HttpRequest} from "@angular/common/http";
@@ -6,15 +6,42 @@ import {HttpEvent} from "@angular/common/http";
 import {FileUploadModel, Assignment} from "../teacher/teacher.component";
 import {HttpParams} from "@angular/common/http";
 import {Headers} from "@angular/http";
+import {BehaviorSubject} from "rxjs";
+import {Router} from "@angular/router";
+import {User} from "./user";
 
 @Injectable()
 export class AuthService {
 
   public API = 'http://localhost:8090/';
   public API1 = 'http://139.162.169.243/';
+  private loggedIn: BehaviorSubject<boolean>;
+ // private loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) {
+  isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
+
+  get isLoggedIn(): Observable<boolean> {
+    console.log('isLoggedIn ::' + this.loggedIn.getValue());
+    //return this.loggedIn.asObservable();
+    return this.isLoginSubject.asObservable();
+  }
+
+    isLoggedIn2(): Observable<boolean> {
+    //return this.loggedIn.asObservable();//this.loggedIn.asObservable();
+      return this.isLoginSubject.asObservable();
+  }
+
+  public setTheBoolean(newValue: boolean): void {
+    this.loggedIn.next(newValue);
+  }
+
+
+  @Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+
+
+  constructor(private http: HttpClient, private router: Router) {
     console.log(this.API);
+    this.loggedIn = new BehaviorSubject<boolean>(false);
   }
 
   getAll(): Observable<any> {
@@ -28,10 +55,63 @@ export class AuthService {
     return this.http.post<any>(this.API + 'login/employee', credentials)
   }
 
+  login(user: User){
+    console.log("user is >> " + user.username, user.password);
+
+    if (user.username !== '' && user.password !== '' ) { // {3}
+      this.http.post<any>(this.API + 'login/user', user)
+      .subscribe(data => {
+        if(data) {
+          localStorage.setItem('token', 'JWT');
+          this.isLoginSubject.next(true);
+          this.loggedIn.next(true);
+          localStorage.setItem('grade', data["grade"]);
+          localStorage.setItem('userId', data["userid"]);
+          localStorage.setItem('usertype', data["usertype"]);
+          //this.setTheBoolean(true);
+          console.log('at login isLoggedIn ::' + this.loggedIn.getValue());
+          if(data["usertype"]=="1")
+            this.router.navigate(['teacher']);
+          else
+            this.router.navigate(['student']);
+
+
+          // console.log('attempAuth ::');
+          // this.router.navigate(['/']);
+          // console.log('attempAuth ::');
+        }
+        else {
+          alert('Invalid Username or Password !!');
+        }
+      });
+    }
+  }
+
+  logout() {
+    localStorage.removeItem('token');// {4}
+    localStorage.removeItem('userid');
+    localStorage.removeItem('grade');
+    localStorage.removeItem('usertype');
+    //this.loggedIn.next(false);
+    this.isLoginSubject.next(false);
+    this.router.navigate(['/']);
+  }
+
+  private hasToken() : boolean {
+    return !!localStorage.getItem('token');
+  }
+
+
   loginUser(username: string, password: string): Observable<any> {
     const credentials = {username: username, password: password};
     console.log('attempAuth ::');
+    this.loggedIn.next(true);
+    this.fireIsLoggedIn.emit('dd');
     return this.http.post<any>(this.API + 'login/user', credentials)
+  }
+
+  getEmitter() {
+    return this.fireIsLoggedIn;
   }
 
   pushFileToStorage(file: File, data: FileUploadModel): Observable<HttpEvent<{}>> {
@@ -95,9 +175,15 @@ export class AuthService {
 
   //http://localhost:8090/getTeacherAssignment?teacherid=1
   getTeacherAssignment(teacherid : string): Observable<Assignment[]> {
-    console.log("ddd");
+    console.log("getTeacherAssignment");
    // return this.http.get<any>(this.API + 'employee');
     return this.http.get<Assignment[]>(this.API + 'getTeacherAssignment?teacherid='+teacherid);
+  }
+
+  getGradeAssignment(grade : string): Observable<Assignment[]> {
+    console.log("getGradeAssignment");
+    // return this.http.get<any>(this.API + 'employee');
+    return this.http.get<Assignment[]>(this.API + 'getGradeAssignment?grade='+grade);
   }
 
   getFiles(filename: string): Observable<any> {

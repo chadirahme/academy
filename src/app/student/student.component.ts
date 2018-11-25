@@ -22,13 +22,14 @@ export class StudentComponent implements OnInit {
   loadData(): void {
     try
     {
-      this.authService.getTeacherAssignment("0").subscribe(data => {
+      console.log("grade>> "+ localStorage.getItem('grade'));
+      this.authService.getGradeAssignment(localStorage.getItem('grade')).subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         //this.dataSource.paginator = this.paginator;
         // this.fileUploads =data;
-        for (const car of data) {
-          console.log(car);
-        }
+        // for (const car of data) {
+        //   console.log(car);
+        // }
       });
 
     }
