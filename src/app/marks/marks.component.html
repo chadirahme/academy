@@ -1,0 +1,152 @@
+<p>
+  Semester:1  Algebra 1  Grade:8A Teacher: Nizar Ali
+</p>
+<p align="center">
+  FIRST TERM MARKS - Academic Year 2018 - 2019
+</p>
+
+<div class="example-container mat-elevation-z8">
+
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <button mat-icon-button matSuffix aria-label="clear" *ngIf="filter.value" (click)="filter.value=''; applyFilter('');">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+
+<mat-table #table [dataSource]="dataSource">
+
+  <!--<ng-container matColumnDef="sid" >-->
+    <!--<mat-header-cell *matHeaderCellDef [style.display]="''">ID </mat-header-cell>-->
+    <!--<mat-cell *matCellDef="let element" [style.display]="''"> {{element.sid}} </mat-cell>-->
+  <!--</ng-container>-->
+
+  <ng-container matColumnDef="sno" >
+    <mat-header-cell *matHeaderCellDef >SNO </mat-header-cell>
+    <mat-cell *matCellDef="let element" > {{element.sno}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+
+  <ng-container matColumnDef="studentname" >
+    <mat-header-cell *matHeaderCellDef > Name of Student </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.studentname}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="cw">
+    <mat-header-cell *matHeaderCellDef> CW <br/>20
+
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput placeholder="CW" [value]="0" [(ngModel)]="element.cw">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="hw">
+    <mat-header-cell *matHeaderCellDef> HW <br/>10 </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput placeholder="CW" [value]="0" [(ngModel)]="element.hw">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="project">
+    <mat-header-cell *matHeaderCellDef> project<br/>10 </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput [(ngModel)]="element.project">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="quiz1">
+    <mat-header-cell *matHeaderCellDef> quiz1 <br/>10</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput [(ngModel)]="element.quiz1">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="quiz2">
+    <mat-header-cell *matHeaderCellDef> quiz2 <br/>10</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput [(ngModel)]="element.quiz2">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="quiz3">
+    <mat-header-cell *matHeaderCellDef> quiz3 <br/>10</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput [(ngModel)]="element.quiz3">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="avgquiz">
+    <mat-header-cell *matHeaderCellDef> avgquiz <br/>10</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput [(ngModel)]="element.avgquiz">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="test1">
+    <mat-header-cell *matHeaderCellDef> test1 <br/>100</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput [(ngModel)]="element.test1">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="finalexam">
+    <mat-header-cell *matHeaderCellDef> finalexam <br/>100</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput [(ngModel)]="element.finalexam">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="finalmark">
+    <mat-header-cell *matHeaderCellDef> finalgrade<br/>100 </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-form-field floatLabel="never">
+        <input matInput [(ngModel)]="element.finalmark">
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <!--<ng-container matColumnDef="weight">-->
+    <!--<mat-header-cell *matHeaderCellDef> Academic Year </mat-header-cell>-->
+    <!--<mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>-->
+  <!--</ng-container>-->
+
+  <!--<ng-container matColumnDef="symbol">-->
+    <!--<mat-header-cell *matHeaderCellDef> Academic Year </mat-header-cell>-->
+    <!--<mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>-->
+  <!--</ng-container>-->
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+
+  <mat-card-actions align="center">
+    <button mat-raised-button  color="primary"  (click)="onSubmit()">Submit</button>
+  </mat-card-actions>
+
+</div>

@@ -44,6 +44,7 @@ import {LoginLayoutComponent} from "./layouts/login-layout.component";
 import {TeacherComponent} from "./teacher/teacher.component";
 import {StudentComponent} from "./student/student.component";
 import {OurschoolComponent} from "./ourschool/ourschool.component";
+import {MarksComponent} from "./marks/marks.component";
 const routes: Routes = [
   {
     path: '',
@@ -85,6 +86,18 @@ const routes: Routes = [
       {
         path: 'student',
         component: StudentComponent
+      }
+    ]
+  },
+
+  {
+    path: '',
+    component: HomeLayoutComponent,
+    //canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'marks',
+        component: MarksComponent
       }
     ]
   },

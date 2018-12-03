@@ -20,6 +20,7 @@ import {HomeLayoutComponent} from "./layouts/home-layout.component";
 import {LoginLayoutComponent} from "./layouts/login-layout.component";
 import {HeaderComponent} from "./header/header.component";
 import {AuthGuard} from "./core/auth.guard";
+import { MarksComponent } from './marks/marks.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {AuthGuard} from "./core/auth.guard";
     OurschoolComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    MarksComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import {Headers} from "@angular/http";
 import {BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 import {User} from "./user";
+import {Student} from "./student";
 
 @Injectable()
 export class AuthService {
@@ -190,4 +191,33 @@ export class AuthService {
     return this.http.get(this.API+ 'files/'+filename ,{responseType: 'blob' as 'json'});
   }
 
+  deleteAssignment(id : string) : Observable<any>{
+    return this.http.delete<any>(this.API + 'deleteAssignment/id/'+id);
+    //.subscribe(data => {
+    //   console.log(data);
+    //   if(data){
+    //     return 1;
+    //     }
+    //     else{
+    //     return 0;
+    //   }
+    // });
+    // return 1;
+
+  }
+
+  saveMarks(data : any[]): Observable<any> {
+    //const credentials = {username: username, password: password};
+    console.log('attempAuth ::');
+    //this.loggedIn.next(true);
+    //this.fireIsLoggedIn.emit('dd');
+    return this.http.post<any>(this.API + 'marks/save', data)
+  }
+
+  ///marks/getStudentGradeAndSection
+  getStudentGradeAndSection(grade : string , section: string): Observable<Student[]> {
+    console.log("getStudentGradeAndSection");
+    // return this.http.get<any>(this.API + 'employee');
+    return this.http.get<Student[]>(this.API + 'marks/getStudentGradeAndSection?grade='+grade+'&section='+section);
+  }
 }

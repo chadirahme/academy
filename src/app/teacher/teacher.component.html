@@ -170,6 +170,11 @@
 
     <mat-table #table [dataSource]="dataSource">
 
+      <!--<ng-container matColumnDef="id">-->
+        <!--<mat-header-cell *matHeaderCellDef> Academic Year </mat-header-cell>-->
+        <!--<mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>-->
+      <!--</ng-container>-->
+
       <ng-container matColumnDef="academicyear">
         <mat-header-cell *matHeaderCellDef> Academic Year </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.academicyear}} </mat-cell>
@@ -212,6 +217,14 @@
       </ng-container>
 
 
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+        <mat-cell *matCellDef="let element" (click)="onDelete(element.id)">
+          <button mat-raised-button  style="background-color: red" color="primary">Delete</button>
+          <!--<a (click)="onExport($event)">Download</a>-->
+        </mat-cell>
+
+      </ng-container>
 
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

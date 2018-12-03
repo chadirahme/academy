@@ -36,7 +36,7 @@ export class TeacherComponent implements OnInit {
 
   selectedFiles: FileList;
   currentFileUpload: File;
-   displayedColumns: string[] = ['academicyear','grade', 'section', 'subject','filetype','filename' ,'filepath'];
+   displayedColumns: string[] = ['academicyear','grade', 'section', 'subject','filetype','filename' ,'filepath','id'];
   //displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   //dataSource: MatTableDataSource<Assignment>;
   //dataSource = new MatTableDataSource();
@@ -149,6 +149,14 @@ export class TeacherComponent implements OnInit {
       }
     });
 
+  }
+  onDelete(id: string) {
+    console.log(id);
+    this.authService.deleteAssignment(id).subscribe(data => {
+      if (data) {
+        this.loadData();
+      }
+    });
   }
 
   onExport(filename: string) {
