@@ -23,3 +23,11 @@
 .mat-column-studentname{
   flex: 0 0 400px;
 }
+
+.positive {
+  background-color: green;
+}
+
+.negative {
+  background-color: red;
+}

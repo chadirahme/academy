@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  <span>
+    <img src="/assets/logo.png" class="angular-logo">
+
+    American Academy School
+
+  </span>
+  <span class="fill-remaining-space"></span>
+
+  <!--<a mat-button routerLink="/" (click)="setTitle( 'Home - American Academy School' )">Home</a>-->
+
+  <a mat-button routerLink="/teacher" (click)="setTitle( 'Our School - American Academy School' )">Marks</a>
+
+  <a mat-button routerLink="/teacherassignment" (click)="setTitle( 'Assignment - American Academy School' )">Assignment</a>
+
+  <!--<a mat-button routerLink="/marks" (click)="setTitle( 'Marks - American Academy School' )">Marks</a>-->
+
+  <!--<button mat-button>Menu Option 01</button>-->
+  <!--<button mat-button>Menu Option 02</button>-->
+  <a mat-button (click)="onLogout()">Logout</a>
+</mat-toolbar>

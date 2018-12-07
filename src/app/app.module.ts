@@ -21,6 +21,9 @@ import {LoginLayoutComponent} from "./layouts/login-layout.component";
 import {HeaderComponent} from "./header/header.component";
 import {AuthGuard} from "./core/auth.guard";
 import { MarksComponent } from './marks/marks.component';
+import { TeacherdashboardComponent } from './teacherdashboard/teacherdashboard.component';
+import {TeacherLayoutComponent} from "./layouts/teacher-layout.component";
+import {TeacherheaderComponent} from "./header/teacherheader.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { MarksComponent } from './marks/marks.component';
     HomeLayoutComponent,
     LoginLayoutComponent,
     HeaderComponent,
-    MarksComponent
+    TeacherheaderComponent,
+    MarksComponent,
+    TeacherdashboardComponent,
+    TeacherLayoutComponent
   ],
   imports: [
     BrowserModule,

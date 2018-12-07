@@ -1,8 +1,8 @@
 <p>
-  Semester:1  Algebra 1  Grade:8A Teacher: Nizar Ali
+  {{this.pageFilter}}
 </p>
 <p align="center">
-  FIRST TERM MARKS - Academic Year 2018 - 2019
+  {{pageHeader}}
 </p>
 
 <div class="example-container mat-elevation-z8">
@@ -38,12 +38,12 @@
 
 
   <ng-container matColumnDef="cw">
-    <mat-header-cell *matHeaderCellDef> CW <br/>20
+    <mat-header-cell *matHeaderCellDef> CW <br/>10
 
     </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput placeholder="CW" [value]="0" [(ngModel)]="element.cw">
+        <input matInput  type="number" [(ngModel)]="element.cw" (change)="checkCW(dataSource.filteredData.indexOf(element),'cw')">
       </mat-form-field>
     </mat-cell>
   </ng-container>
@@ -52,79 +52,82 @@
     <mat-header-cell *matHeaderCellDef> HW <br/>10 </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput placeholder="CW" [value]="0" [(ngModel)]="element.hw">
+        <input matInput type="number" [(ngModel)]="element.hw" (change)="checkCW(dataSource.filteredData.indexOf(element) , 'hw')">
       </mat-form-field>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="project">
-    <mat-header-cell *matHeaderCellDef> project<br/>10 </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Project<br/>5 </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput [(ngModel)]="element.project">
+        <input matInput type="number" [(ngModel)]="element.project" (change)="checkProject(dataSource.filteredData.indexOf(element))">
       </mat-form-field>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="quiz1">
-    <mat-header-cell *matHeaderCellDef> quiz1 <br/>10</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Quiz1 <br/>10</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput [(ngModel)]="element.quiz1">
+        <input matInput [(ngModel)]="element.quiz1" type="number" (change)="checkQuiz1(dataSource.filteredData.indexOf(element))"
+               (input)="calAvgQuiz(dataSource.filteredData.indexOf(element))">
       </mat-form-field>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="quiz2">
-    <mat-header-cell *matHeaderCellDef> quiz2 <br/>10</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Quiz2 <br/>10</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput [(ngModel)]="element.quiz2">
+        <input matInput [(ngModel)]="element.quiz2" type="number" (change)="checkQuiz2(dataSource.filteredData.indexOf(element))"
+               (input)="calAvgQuiz(dataSource.filteredData.indexOf(element))">
       </mat-form-field>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="quiz3">
-    <mat-header-cell *matHeaderCellDef> quiz3 <br/>10</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Quiz3 <br/>10</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput [(ngModel)]="element.quiz3">
+        <input matInput [(ngModel)]="element.quiz3" type="number" (change)="checkQuiz3(dataSource.filteredData.indexOf(element))"
+               (input)="calAvgQuiz(dataSource.filteredData.indexOf(element))">
       </mat-form-field>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="avgquiz">
-    <mat-header-cell *matHeaderCellDef> avgquiz <br/>10</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef matTooltip="A+B/3"> Avg Quiz<br/>10</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput [(ngModel)]="element.avgquiz">
+       <input matInput [(ngModel)]="element.avgquiz" disabled>
       </mat-form-field>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="test1">
-    <mat-header-cell *matHeaderCellDef> test1 <br/>100</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Test1 <br/>100</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput [(ngModel)]="element.test1">
+        <input matInput [(ngModel)]="element.test1" type="number" (change)="checkTest1(dataSource.filteredData.indexOf(element))">
       </mat-form-field>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="finalexam">
-    <mat-header-cell *matHeaderCellDef> finalexam <br/>100</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Final Exam <br/>100</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput [(ngModel)]="element.finalexam">
+        <input matInput [(ngModel)]="element.finalexam" type="number" (change)="checkFinalExam(dataSource.filteredData.indexOf(element))">
       </mat-form-field>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="finalmark">
-    <mat-header-cell *matHeaderCellDef> finalgrade<br/>100 </mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <mat-header-cell *matHeaderCellDef> Final Grade<br/>100 </mat-header-cell>
+    <mat-cell *matCellDef="let element" [ngClass]="{'positive' : element.finalmark >= 50, 'negative' : element.finalmark < 50}">
       <mat-form-field floatLabel="never">
-        <input matInput [(ngModel)]="element.finalmark">
+        <input matInput [(ngModel)]="element.finalmark" disabled>
       </mat-form-field>
     </mat-cell>
   </ng-container>
@@ -141,7 +144,9 @@
 
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"
+           >
+  </mat-row>
 
 </mat-table>
 

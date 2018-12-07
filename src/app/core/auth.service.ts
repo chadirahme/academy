@@ -69,6 +69,7 @@ export class AuthService {
           localStorage.setItem('grade', data["grade"]);
           localStorage.setItem('userId', data["userid"]);
           localStorage.setItem('usertype', data["usertype"]);
+          localStorage.setItem('userName',data["username"]);
           //this.setTheBoolean(true);
           console.log('at login isLoggedIn ::' + this.loggedIn.getValue());
           if(data["usertype"]=="1")
@@ -219,5 +220,11 @@ export class AuthService {
     console.log("getStudentGradeAndSection");
     // return this.http.get<any>(this.API + 'employee');
     return this.http.get<Student[]>(this.API + 'marks/getStudentGradeAndSection?grade='+grade+'&section='+section);
+  }
+  //getStudentMarks
+  getStudentMarks(data : any): Observable<Student[]> {
+    console.log("getStudentMarks");
+    // return this.http.get<any>(this.API + 'employee');
+    return this.http.post<Student[]>(this.API + 'marks/getStudentMarks',data);
   }
 }

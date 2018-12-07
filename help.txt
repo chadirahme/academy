@@ -1,1 +1,2 @@
 ng g c marks --module app
+ng build --prod
