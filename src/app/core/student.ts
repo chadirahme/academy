@@ -14,10 +14,11 @@ export class Student {
   test1: number;
   finalexam: number;
   finalmark: number;
+  marksLetter: string;
 
-  get Studentname(){
-    return this.studentname.toUpperCase();
-  }
+  // get Studentname(){
+  //   return this.studentname.toUpperCase();
+  // }
 
   // get avgquiz() {
   //   return this.quiz1 + this.quiz2;

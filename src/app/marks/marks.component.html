@@ -41,9 +41,9 @@
     <mat-header-cell *matHeaderCellDef> CW <br/>10
 
     </mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element; let i = index">
       <mat-form-field floatLabel="never">
-        <input matInput  type="number" [(ngModel)]="element.cw" (change)="checkCW(dataSource.filteredData.indexOf(element),'cw')">
+        <input matInput  type="number" [(ngModel)]="element.cw" (change)="checkCW(i,'cw')">
       </mat-form-field>
     </mat-cell>
   </ng-container>
@@ -52,7 +52,7 @@
     <mat-header-cell *matHeaderCellDef> HW <br/>10 </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <mat-form-field floatLabel="never">
-        <input matInput type="number" [(ngModel)]="element.hw" (change)="checkCW(dataSource.filteredData.indexOf(element) , 'hw')">
+        <input matInput type="number" [(ngModel)]="element.hw" (change)="checkCW(dataSource.filteredData.indexOf(element), 'hw')">
       </mat-form-field>
     </mat-cell>
   </ng-container>
@@ -130,6 +130,16 @@
         <input matInput [(ngModel)]="element.finalmark" disabled>
       </mat-form-field>
     </mat-cell>
+  </ng-container>
+
+    <ng-container matColumnDef="marksLetter">
+      <mat-header-cell *matHeaderCellDef> Letter Grade </mat-header-cell>
+      <mat-cell *matCellDef="let element" [ngClass]="{'positive' : element.finalmark >= 50, 'negative' : element.finalmark < 50}">
+        <mat-form-field floatLabel="never">
+          <input matInput [(ngModel)]="element.marksLetter" disabled>
+        </mat-form-field>
+      </mat-cell>
+
   </ng-container>
 
   <!--<ng-container matColumnDef="weight">-->

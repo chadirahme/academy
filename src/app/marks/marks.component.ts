@@ -38,6 +38,7 @@ export class MarksComponent implements OnInit {
     {columnDef: 'test1', header: 'test1', cell: (element: Marks) => `${element.test1}`},
     {columnDef: 'finalexam', header: 'finalexam', cell: (element: Marks) => `${element.finalexam}`},
     {columnDef: 'finalmark', header: 'finalmark', cell: (element: Marks) => `${element.finalmark}`},
+    {columnDef: 'marksLetter', header: 'marksLetter', cell: (element: Marks) => `${element.marksLetter}`},
   ];
 
   displayedColumns = this.columns.map(c => c.columnDef);
@@ -172,13 +173,44 @@ export class MarksComponent implements OnInit {
         section: this.newItem.section,
         teacherid: this.userId,
         teachername:this.userName,
-        subject: this.newItem.subject
+        subject: this.newItem.subject,
+        marksLetter : this.getGradeLetter(item.finalmark)
 
       };
       this.data.push(newName);
     }
 
     this.dataSource = new MatTableDataSource(this.data);
+  }
+
+  checkCW1(row,type)
+  {
+    // let value = parseInt(val);
+    // value=value*1;
+    // if(value<0 || value >10)
+    // alert('worong');
+    //this.avaregQuiz=4;
+    this.item=row; //this.data[index];
+    if(type=='cw') {
+      let value = Number(this.item.cw);
+      if(value==0)
+        value=-1;
+      if (value < 0 || value > 10) {
+        alert('Please enter a mark between 0 and 10 !! ');
+        this.item.cw = 0;
+      }
+    }
+    else if(type=='hw') {
+      let value = Number(this.item.hw);
+      if(value==0)
+        value=-1;
+      if (value < 0 || value > 10) {
+        alert('Please enter a mark between 0 and 10 !! ');
+        this.item.hw = 0;
+      }
+    }
+
+    this.calFinalGrade(index);
   }
 
   checkCW(index,type)
@@ -188,6 +220,7 @@ export class MarksComponent implements OnInit {
     // if(value<0 || value >10)
     // alert('worong');
     //this.avaregQuiz=4;
+    console.log(index);
     this.item=this.data[index];
     if(type=='cw') {
       let value = Number(this.item.cw);
@@ -316,6 +349,53 @@ export class MarksComponent implements OnInit {
     //console.log(this.item.quiz3 + this.item.quiz1);
     this.item.finalmark=Math.round( (this.item.hw + this.item.cw + this.item.project)  + (this.item.avgquiz *1.5)
       + (this.item.test1*0.2)  + (this.item.finalexam *0.4) ) ;
+    this.item.marksLetter = this.getGradeLetter(this.item.finalmark);
+  }
+
+  getGradeLetter(x)
+  {
+    //const x = this.item.finalmark;
+    switch (true) {
+      case (x>= 97):
+        return "A+";
+        break;
+      case (x < 97 && x >=93):
+        return "A";
+        break;
+      case (x < 93 && x >=90):
+        return "A-";
+        break;
+      case (x < 90 && x >=87):
+        return "B+";
+        break;
+      case (x < 87 && x >=83):
+        return "B";
+        break;
+      case (x < 83 && x >=80):
+        return "B-";
+        break;
+      case (x < 80 && x >=77):
+        return "C+";
+        break;
+      case (x < 77 && x >=73):
+        return "C";
+        break;
+      case (x < 73 && x >=70):
+        return "C-";
+        break;
+      case (x < 70 && x >=67):
+        return "D+";
+        break;
+      case (x < 67 && x >=65):
+        return "D";
+        break;
+      case (x < 65):
+        return "F";
+        break;
+      default:
+        return "F";
+        break;
+    }
   }
 
 }
@@ -342,6 +422,7 @@ export class Marks {
   section: string;
   teacherid: number;
   subject: string;
+  marksLetter: string;
 
   get Studentname(){
     return this.studentname.toUpperCase();
