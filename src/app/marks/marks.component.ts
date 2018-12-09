@@ -5,6 +5,7 @@ import {MatTableDataSource} from "@angular/material";
 import {AuthService} from "../core/auth.service";
 import {Student} from "../core/student";
 import {FileUploadModel} from "../teacher/teacher.component";
+import {SetupData} from "../common/setupdata";
 
 @Component({
   selector: 'app-marks',
@@ -154,7 +155,7 @@ export class MarksComponent implements OnInit {
       let newName = {
         sno:this.index.toString(),
         studentid:item.studentid,
-        studentname:item.studentname.toUpperCase(),
+        studentname:item.studentname, //.toUpperCase(),
         cw: item.cw,
         hw:item.hw,
         project:item.project,
@@ -174,7 +175,7 @@ export class MarksComponent implements OnInit {
         teacherid: this.userId,
         teachername:this.userName,
         subject: this.newItem.subject,
-        marksLetter : this.getGradeLetter(item.finalmark)
+        marksLetter : SetupData.getGradeLetter(item.finalmark)
 
       };
       this.data.push(newName);
@@ -210,7 +211,7 @@ export class MarksComponent implements OnInit {
       }
     }
 
-    this.calFinalGrade(index);
+   // this.calFinalGrade(index);
   }
 
   checkCW(index,type)
@@ -349,53 +350,7 @@ export class MarksComponent implements OnInit {
     //console.log(this.item.quiz3 + this.item.quiz1);
     this.item.finalmark=Math.round( (this.item.hw + this.item.cw + this.item.project)  + (this.item.avgquiz *1.5)
       + (this.item.test1*0.2)  + (this.item.finalexam *0.4) ) ;
-    this.item.marksLetter = this.getGradeLetter(this.item.finalmark);
-  }
-
-  getGradeLetter(x)
-  {
-    //const x = this.item.finalmark;
-    switch (true) {
-      case (x>= 97):
-        return "A+";
-        break;
-      case (x < 97 && x >=93):
-        return "A";
-        break;
-      case (x < 93 && x >=90):
-        return "A-";
-        break;
-      case (x < 90 && x >=87):
-        return "B+";
-        break;
-      case (x < 87 && x >=83):
-        return "B";
-        break;
-      case (x < 83 && x >=80):
-        return "B-";
-        break;
-      case (x < 80 && x >=77):
-        return "C+";
-        break;
-      case (x < 77 && x >=73):
-        return "C";
-        break;
-      case (x < 73 && x >=70):
-        return "C-";
-        break;
-      case (x < 70 && x >=67):
-        return "D+";
-        break;
-      case (x < 67 && x >=65):
-        return "D";
-        break;
-      case (x < 65):
-        return "F";
-        break;
-      default:
-        return "F";
-        break;
-    }
+    this.item.marksLetter = SetupData.getGradeLetter(this.item.finalmark);
   }
 
 }
@@ -430,35 +385,4 @@ export class Marks {
 }
 
 
-  export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  //cw: number;
-  //hw: number;
 
-}
-
-const data1: Element[] = [
-  {position: 1, name: 'Abdallah Mansour Mahmoud Alrahamneh', weight: 1.0079, symbol: 'H' },
-  {position: 2, name: 'Abdalrhman Taha Mohamed Mohamed Taha Hussein', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Abdelrahman Mohd Abdelrahman Eleish', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Ayan Ahmad', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Buchra Naser Jamal Eddin', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Ehsan Ayman Rabata', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Elijah Zane Lira', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Emad Ismail Mohamed Ismail Eid', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Essa Mohammad Hamdan', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Fatima Abdulaziz Mulla Zainal Al-Mulla', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Ibrahim Riad Mostafa Mohamed Maree', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Jad Ishaq Yousef Abu Alia', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Judie Amr Abdelsattar Fadl', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Karim Moh\'d Kamal Ghanaim', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Mazin Ahmed El-Kishif Mohamed', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Milad Mohammad Shahaby', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Misha Samantha Panganiban Paco', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Mostafa Husam Al-Haj Kadour', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Muhammed Zidan', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Najemeddin Yahya Al-Kurdi', weight: 40.078, symbol: 'Ca'},
-];

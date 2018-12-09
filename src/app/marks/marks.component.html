@@ -33,7 +33,7 @@
 
   <ng-container matColumnDef="studentname" >
     <mat-header-cell *matHeaderCellDef > Name of Student </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.studentname}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.studentname | uppercase}} </mat-cell>
   </ng-container>
 
 
@@ -136,7 +136,8 @@
       <mat-header-cell *matHeaderCellDef> Letter Grade </mat-header-cell>
       <mat-cell *matCellDef="let element" [ngClass]="{'positive' : element.finalmark >= 50, 'negative' : element.finalmark < 50}">
         <mat-form-field floatLabel="never">
-          <input matInput [(ngModel)]="element.marksLetter" disabled>
+          <input matInput value="{{ element.finalmark | marksletter }}" disabled>
+          <!--<input matInput [(ngModel)]="element.finalmark | marksletter" disabled>-->
         </mat-form-field>
       </mat-cell>
 
@@ -161,7 +162,10 @@
 </mat-table>
 
   <mat-card-actions align="center">
-    <button mat-raised-button  color="primary"  (click)="onSubmit()">Submit</button>
+    <button mat-raised-button  color="primary"  (click)="onSubmit()">Save</button>
+    <button mat-raised-button  color="primary"  (click)="onSubmit()" style="margin-left: 10px;">Submit</button>
+
   </mat-card-actions>
+
 
 </div>

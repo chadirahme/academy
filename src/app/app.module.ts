@@ -24,6 +24,7 @@ import { MarksComponent } from './marks/marks.component';
 import { TeacherdashboardComponent } from './teacherdashboard/teacherdashboard.component';
 import {TeacherLayoutComponent} from "./layouts/teacher-layout.component";
 import {TeacherheaderComponent} from "./header/teacherheader.component";
+import {MarksPipe} from "./common/marks.pipe";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {TeacherheaderComponent} from "./header/teacherheader.component";
     TeacherheaderComponent,
     MarksComponent,
     TeacherdashboardComponent,
-    TeacherLayoutComponent
+    TeacherLayoutComponent,
+    MarksPipe
   ],
   imports: [
     BrowserModule,

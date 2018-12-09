@@ -5,6 +5,7 @@ import {HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {MatTableDataSource, MatPaginator} from "@angular/material";
 import {Router} from "@angular/router";
+import {SetupData} from "../common/setupdata";
 // import {DataSource} from '@angular/cdk/collections';
 
 @Component({
@@ -59,7 +60,7 @@ export class TeacherComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
-    this.years =["2018-2019","2017-2018","2016-2017","2015-2016","2014-2015"];
+    this.years =SetupData.academicyears; //["2018-2019","2017-2018","2016-2017","2015-2016","2014-2015"];
     this.grades =["KG1","KG2","Grade1","Grade2","Grade3","Grade4","Grade5","Grade6","Grade7",
     "Grade8","Grade9","Grade10","Grade11","Grade12"];
     this.classes=["A","B","C","D","E","F"];

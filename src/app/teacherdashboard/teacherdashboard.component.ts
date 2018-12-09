@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../core/auth.service";
 import {Router} from "@angular/router";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {SetupData} from "../common/setupdata";
 
 @Component({
   selector: 'app-teacherdashboard',
@@ -11,6 +12,7 @@ import {FormBuilder} from "@angular/forms";
 })
 export class TeacherdashboardComponent implements OnInit {
 
+  mainForm: FormGroup;
   userId: any;
   usertype: any;
   semesterid: number;
@@ -35,7 +37,7 @@ export class TeacherdashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.years = ["2018-2019", "2017-2018", "2016-2017", "2015-2016", "2014-2015"];
+    this.years = SetupData.academicyears;
     if (this.userId == 3) {
       this.grades = ["Grade8", "Grade9", "Grade10"];
       this.classes=["A","B","C"];
@@ -49,15 +51,27 @@ export class TeacherdashboardComponent implements OnInit {
     }
 
     else {
-    this.grades = ["KG1", "KG2", "Grade1", "Grade2", "Grade3", "Grade4", "Grade5", "Grade6", "Grade7",
-      "Grade8", "Grade9", "Grade10", "Grade11", "Grade12"];
-      this.classes=["A","B","C","D","E","F"];
-      this.subjects=["English","Maths","Science","Social","IT","Regular Arabic","Religion Islamic",
-        "Qatar History" , "Art","Physics","Biology","Chemistry","Other"];
+      this.grades = SetupData.grades;
+      this.classes=SetupData.classes;
+      this.subjects=SetupData.subjects;
     }
 
 
-    this.types=["Semester 1" , "Semester 2"];
+    this.types=SetupData.semesters;
+    //set defualt value for dropdown
+    this.mainForm = this.formBuilder.group({
+      ddlYear: [this.years[0]],
+      ddlSemester: [this.types[0]],
+      ddlGrade: [this.grades[0]],
+      ddlClass: [this.classes[0]],
+      ddlSubject: [this.subjects[0]],
+    });
+
+    this.selectedYear=this.years[0];
+    this.changeType(this.types[0]);
+    this.selectedGrade=this.grades[0];
+    this.selectedClass=this.classes[0];
+    this.selectedSubject=this.subjects[0];
 
   }
 
