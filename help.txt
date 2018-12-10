@@ -1,2 +1,15 @@
 ng g c marks --module app
 ng build --prod
+
+
+- pipe
+https://stackblitz.com/angular/ebogvmlomgg?file=src%2Fapp%2Fapp.component.ts
+
+-mongoDB
+https://appdividend.com/2018/05/27/angular-6-crud-example-mean-stack-tutorial/#Step_2_Install_Bootstrap_4
+
+--materia desgin
+https://github.com/tomastrajan/angular-ngrx-material-starter
+
+https://www.djamware.com/post/5b00bb9180aca726dee1fd6d/mean-stack-angular-6-crud-web-application
+
