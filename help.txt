@@ -13,3 +13,18 @@ https://github.com/tomastrajan/angular-ngrx-material-starter
 
 https://www.djamware.com/post/5b00bb9180aca726dee1fd6d/mean-stack-angular-6-crud-web-application
 
+--smart table
+https://www.js-tutorials.com/angularjs-tutorial/add-edit-delete-example-using-ng2-smart-angular-4-part-i/
+
+--add bootstrap UI
+https://www.js-tutorials.com/angularjs-tutorial/angular-bootstrap-modal-example/
+
+--mongo service and notification
+https://embed.plnkr.co/plunk/FWUVT7
+
+--smart table
+https://www.npmjs.com/package/ng2-smart-table
+
+npm i rxjs-compat --save
+npm i ng2-completer --save
+npm install --save ng2-smart-table
