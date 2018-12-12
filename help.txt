@@ -24,6 +24,8 @@ https://embed.plnkr.co/plunk/FWUVT7
 
 --smart table
 https://www.npmjs.com/package/ng2-smart-table
+-- add random records
+http://lorenzofox3.github.io/smart-table-website/
 
 npm i rxjs-compat --save
 npm i ng2-completer --save
