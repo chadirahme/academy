@@ -1,4 +1,5 @@
 export class Student {
+  sno: number;
   studentid: number;
   //rollnumber: string;
   studentname: string;

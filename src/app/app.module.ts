@@ -25,6 +25,9 @@ import { TeacherdashboardComponent } from './teacherdashboard/teacherdashboard.c
 import {TeacherLayoutComponent} from "./layouts/teacher-layout.component";
 import {TeacherheaderComponent} from "./header/teacherheader.component";
 import {MarksPipe} from "./common/marks.pipe";
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { StudentlistComponent } from './admin/studentlist/studentlist.component';
+import {Ng2SmartTableModule} from "ng2-smart-table";
 
 @NgModule({
   declarations: [
@@ -43,7 +46,9 @@ import {MarksPipe} from "./common/marks.pipe";
     MarksComponent,
     TeacherdashboardComponent,
     TeacherLayoutComponent,
-    MarksPipe
+    MarksPipe,
+    ChangepasswordComponent,
+    StudentlistComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,8 @@ import {MarksPipe} from "./common/marks.pipe";
     CustomMaterialModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SmartTableModule,
   ],
   providers: [CarService,FormBuilder,AuthGuard,AuthService],
   bootstrap: [AppComponent]

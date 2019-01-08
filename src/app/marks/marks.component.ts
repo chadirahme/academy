@@ -153,7 +153,7 @@ export class MarksComponent implements OnInit {
     for (const item of this.student) {
       this.index++;
       let newName = {
-        sno:this.index.toString(),
+        sno:this.index,
         studentid:item.studentid,
         studentname:item.studentname, //.toUpperCase(),
         cw: item.cw,
@@ -182,6 +182,7 @@ export class MarksComponent implements OnInit {
     }
 
     this.dataSource = new MatTableDataSource(this.data);
+
   }
 
   checkCW1(row,type)

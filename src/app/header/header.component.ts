@@ -15,6 +15,9 @@ import {Observable} from "rxjs";
     .fill-remaining-space {
       flex: 1 1 auto;
     }
+    a {
+  color: inherit;
+}
     `
   ]
 })

@@ -47,6 +47,8 @@ import {OurschoolComponent} from "./ourschool/ourschool.component";
 import {MarksComponent} from "./marks/marks.component";
 import {TeacherdashboardComponent} from "./teacherdashboard/teacherdashboard.component";
 import {TeacherLayoutComponent} from "./layouts/teacher-layout.component";
+import {ChangepasswordComponent} from "./changepassword/changepassword.component";
+import {StudentlistComponent} from "./admin/studentlist/studentlist.component";
 const routes: Routes = [
   {
     path: '',
@@ -93,6 +95,18 @@ const routes: Routes = [
   },
   {
     path: '',
+    component: TeacherLayoutComponent,
+    //canActivate: [AuthGuard], changepassword
+    children: [
+      {
+        path: 'changepassword',
+        component: ChangepasswordComponent
+      }
+    ]
+  },
+
+  {
+    path: '',
     component: HomeLayoutComponent,
     //canActivate: [AuthGuard],
     children: [
@@ -122,6 +136,17 @@ const routes: Routes = [
       {
         path: 'ourschool',
         component: OurschoolComponent
+      }
+    ]
+  },
+  {
+    path: '',
+    component: TeacherLayoutComponent,
+    //canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'studentlist',
+        component: StudentlistComponent
       }
     ]
   },

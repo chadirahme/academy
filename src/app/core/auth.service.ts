@@ -89,7 +89,25 @@ export class AuthService {
     }
   }
 
-  logout() {
+  changePassword(user: User) {
+    console.log("user is >> " + user.username, user.password);
+    user.userid=localStorage.getItem('userId');
+    this.http.post<any>(this.API + 'user/changePassword', user)
+      .subscribe(data => {
+        if(data) {
+          alert('Passwords is changed !!')
+          if(data["usertype"]=="1")
+            this.router.navigate(['teacher']);
+          else
+            this.router.navigate(['student']);
+        }
+        else {
+          alert('Invalid Username !!');
+        }
+      });
+  }
+
+    logout() {
     localStorage.removeItem('token');// {4}
     localStorage.removeItem('userid');
     localStorage.removeItem('grade');
@@ -191,6 +209,12 @@ export class AuthService {
   getFiles(filename: string): Observable<any> {
     return this.http.get(this.API+ 'files/'+filename ,{responseType: 'blob' as 'json'});
   }
+
+  getReport(student: Student): Observable<any> {
+    //this.http.post<any>(this.API + 'user/changePassword', user)
+    return this.http.post<any>(this.API+ 'studentMarksPDF',student , {responseType: 'blob' as 'json'});
+  }
+
 
   deleteAssignment(id : string) : Observable<any>{
     return this.http.delete<any>(this.API + 'deleteAssignment/id/'+id);

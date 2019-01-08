@@ -111,8 +111,6 @@ export class LoginComponent implements OnInit {
         password: ['', Validators.required]
       });
 
-      console.log('ssss');
-
       // this.authService.getAll().subscribe(data => {
       //   this.cars = data;
       //   for (const car of this.cars) {
