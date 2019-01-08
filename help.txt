@@ -1,2 +1,32 @@
 ng g c marks --module app
 ng build --prod
+
+
+- pipe
+https://stackblitz.com/angular/ebogvmlomgg?file=src%2Fapp%2Fapp.component.ts
+
+-mongoDB
+https://appdividend.com/2018/05/27/angular-6-crud-example-mean-stack-tutorial/#Step_2_Install_Bootstrap_4
+
+--materia desgin
+https://github.com/tomastrajan/angular-ngrx-material-starter
+
+https://www.djamware.com/post/5b00bb9180aca726dee1fd6d/mean-stack-angular-6-crud-web-application
+
+--smart table
+https://www.js-tutorials.com/angularjs-tutorial/add-edit-delete-example-using-ng2-smart-angular-4-part-i/
+
+--add bootstrap UI
+https://www.js-tutorials.com/angularjs-tutorial/angular-bootstrap-modal-example/
+
+--mongo service and notification
+https://embed.plnkr.co/plunk/FWUVT7
+
+--smart table
+https://www.npmjs.com/package/ng2-smart-table
+-- add random records
+http://lorenzofox3.github.io/smart-table-website/
+
+npm i rxjs-compat --save
+npm i ng2-completer --save
+npm install --save ng2-smart-table
