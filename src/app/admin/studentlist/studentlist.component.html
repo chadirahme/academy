@@ -33,22 +33,25 @@
   Students List
 </p>
 
-<!--<div class="row">-->
-<!--<mat-form-field class="col-md-6">-->
-  <!--<mat-select placeholder="Grade" (selectionChange)="changeGrade($event.value)" >-->
-    <!--<mat-option *ngFor="let grade of grades" [value]="grade">-->
-      <!--{{grade}}-->
-    <!--</mat-option>-->
-  <!--</mat-select>-->
-<!--</mat-form-field>-->
-<!--<mat-form-field class="col-md-6">-->
-  <!--<mat-select placeholder="Class" (selectionChange)="changeClass($event.value)">-->
-    <!--<mat-option *ngFor="let class of classes" [value]="class">-->
-      <!--{{class}}-->
-    <!--</mat-option>-->
-  <!--</mat-select>-->
-<!--</mat-form-field>-->
-<!--</div>-->
+<div class="row">
+<mat-form-field class="col-md-4">
+  <mat-select placeholder="Grade" (selectionChange)="changeGrade($event.value)" >
+    <mat-option *ngFor="let grade of grades" [value]="grade">
+      {{grade}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="col-md-4">
+  <mat-select placeholder="Class" (selectionChange)="changeClass($event.value)">
+    <mat-option *ngFor="let class of classes" [value]="class">
+      {{class}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+  <mat-card-actions class="col-md-2">
+    <button mat-raised-button  color="primary" (click)="search()">Search</button>
+  </mat-card-actions>
+</div>
 
 <div class="example-container mat-elevation-z8">
 
@@ -95,17 +98,17 @@
     </ng-container>
 
     <ng-container matColumnDef="sno">
-      <mat-header-cell *matHeaderCellDef> Download </mat-header-cell>
-      <mat-cell *matCellDef="let element" (click)="onExport(element)">
-        <button mat-raised-button  color="primary">Marks</button>
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-raised-button  color="primary" (click)="onExport(element)" style="margin-right: 5px">Download</button>
+        <button mat-raised-button  color="primary" (click)="printCommand(element)">Print</button>
         <!--<a (click)="onExport($event)">Download</a>-->
       </mat-cell>
-
     </ng-container>
 
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"
-    >
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
     </mat-row>
 
   </mat-table>

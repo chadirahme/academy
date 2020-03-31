@@ -15,6 +15,8 @@ export class StudentlistComponent implements OnInit {
 
   public grades: any[];
   public classes: any[];
+  selectedGrade: any;
+  selectedClass: any;
   apiParam: any;
   student: Student[];
   //item: Student;
@@ -44,6 +46,8 @@ export class StudentlistComponent implements OnInit {
   ngOnInit() {
     this.grades = SetupData.grades;
     this.classes=SetupData.classes;
+
+    //when build comment this
     this.loadData();
   }
 
@@ -51,8 +55,8 @@ export class StudentlistComponent implements OnInit {
     try
     {
        this.apiParam = {
-        grade: 'Grade8',
-        section: 'A',
+        grade: 'Grade8', // this.selectedGrade,
+        section: 'A' ,// this.selectedClass
       };
 
       console.log("grade>> "+ this.apiParam.grade);
@@ -108,12 +112,29 @@ export class StudentlistComponent implements OnInit {
     }
   };
 
+  search(){
+    if(this.selectedGrade==null){
+      alert('Please select a grade !!');
+      return;
+    }
+    if(this.selectedClass==null){
+      alert('Please select a class !!');
+      return;
+    }
+
+    this.loadData();
+  }
+  changeGrade(val){
+    this.selectedGrade=val;
+  }
+  changeClass(val){
+    this.selectedClass=val;
+  }
+
   onExport(item: Student) {
     try {
 
       console.log(item);
-
-
       const filename="marks.pdf";
       console.log(filename);
       //return ;
@@ -145,6 +166,19 @@ export class StudentlistComponent implements OnInit {
           downloadLink.setAttribute('download', fileName);
         document.body.appendChild(downloadLink);
         downloadLink.click();
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  printCommand(item: Student){
+    try {
+      this.authService.getReportWithoutHeader(item).subscribe(data => {
+        var blob = new Blob([data], {type: "application/pdf"});
+        var fileURL = URL.createObjectURL(blob);
+        window.open(fileURL);
       });
     }
     catch (e) {

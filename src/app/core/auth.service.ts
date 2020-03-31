@@ -14,8 +14,9 @@ import {Student} from "./student";
 @Injectable()
 export class AuthService {
 
-  public API = 'http://localhost:8090/';
-  public API1 = 'http://139.162.169.243/';
+  public API1 = 'http://localhost:8090/';
+  //public API1 = 'http://139.162.169.243/';
+  public API = 'http://hinawi2.dyndns.org:8181/schoolapi/';
   private loggedIn: BehaviorSubject<boolean>;
  // private loggedIn = new BehaviorSubject<boolean>(false);
 
@@ -212,9 +213,12 @@ export class AuthService {
 
   getReport(student: Student): Observable<any> {
     //this.http.post<any>(this.API + 'user/changePassword', user)
-    return this.http.post<any>(this.API+ 'studentMarksPDF',student , {responseType: 'blob' as 'json'});
+    return this.http.post<any>(this.API+ 'studentMarksPDF1',student , {responseType: 'blob' as 'json'});
   }
 
+  getReportWithoutHeader(student: Student): Observable<any> {//studentNewMarksPDF getReportWithoutHeader
+    return this.http.post<any>(this.API+ 'studentNewMarksPDF',student , {responseType: 'blob' as 'json'});
+  }
 
   deleteAssignment(id : string) : Observable<any>{
     return this.http.delete<any>(this.API + 'deleteAssignment/id/'+id);

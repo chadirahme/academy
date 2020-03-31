@@ -38,7 +38,7 @@ export class TeacherdashboardComponent implements OnInit {
 
   ngOnInit() {
     this.years = SetupData.academicyears;
-    if (this.userId == 3) {
+    if (this.userId == 300) {
       this.grades = ["Grade8", "Grade9", "Grade10"];
       this.classes=["A","B","C"];
       this.subjects=["IT"];

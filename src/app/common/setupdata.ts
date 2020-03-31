@@ -9,7 +9,7 @@ export class SetupData
   public static get classes(): string[] { return ["A","B","C","D","E","F"];}
 
   public static get subjects(): string[] { return ["English","Maths","Science","Social","IT","Regular Arabic","Religion Islamic",
-  "Qatar History" , "Art","Physics","Biology","Chemistry","Other"];}
+  "Qatar History" , "Art","Physics","Biology","Chemistry","PE" , "Other"];}
 
   public static get semesters(): string[] {return ["Semester 1" , "Semester 2"];}
 
